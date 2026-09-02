@@ -1,53 +1,56 @@
+'use client';
+import { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 
-export default function Home() {
+export default function ContactPage() {
+    const [lang, setLang] = useState<'EN' | 'FR'>('EN');
+    const currency = lang === 'EN' ? '$' : '€';
+
     return (
-        <div className="bg-[#070A12] text-slate-100 antialiased selection:bg-[#00C2FF] selection:text-[#070A12] min-h-screen font-sans flex flex-col">
-            
-            {/* Minimal Header */}
-            <header className="z-50 bg-[#070A12] border-b border-slate-800/60">
+        <div className="bg-[#070A12] text-slate-100 min-h-screen font-sans flex flex-col">
+            <header className="border-b border-slate-800/60 bg-[#070A12]/90 backdrop-blur-md">
                 <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-                    <Link href="#" className="text-base font-bold tracking-wider text-white uppercase">
-                        DAM
-                    </Link>
-                    <div className="text-sm font-medium text-slate-500 uppercase tracking-widest">
-                        Financial Independence
-                    </div>
+                    <Link href="/" className="font-extrabold tracking-wider text-white text-lg">DAM</Link>
+                    <nav className="hidden md:flex space-x-8 text-sm font-medium text-slate-300">
+                        <Link href="/" className="hover:text-[#00C2FF] transition">Home</Link>
+                        <Link href="/news" className="hover:text-[#00C2FF] transition">News & Insights</Link>
+                        <Link href="/contact" className="text-[#00C2FF]">Contact & Bio</Link>
+                    </nav>
+                    <button 
+                        onClick={() => setLang(lang === 'EN' ? 'FR' : 'EN')}
+                        className="px-3 py-1.5 border border-slate-800 rounded text-xs font-mono text-[#00C2FF] hover:bg-slate-900 transition"
+                    >
+                        {lang === 'EN' ? 'English ($)' : 'Français (€)'}
+                    </button>
                 </div>
             </header>
 
-            {/* Hero Section - Perfectly Centered */}
-            <main className="flex-grow flex items-center justify-center bg-[#070A12] px-6 py-24 md:py-32">
-                <div className="max-w-5xl mx-auto text-center flex flex-col items-center">
-                    
-                    {/* High-Impact Headline */}
-                    <h1 className="text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-extrabold tracking-tighter text-white leading-[1.05] mb-12 max-w-4xl">
-                        FINANCIAL FREEDOM. <br />
-                        IT'S NOT A DREAM. <span className="text-[#00C2FF]">IT'S A DISCIPLINE.</span><br/>
-                        BUILD YOURS.
-                    </h1>
-                    
-                    {/* Single, Stylish Call-to-Action */}
-                    <Link href="#frameworks" 
-                        className="group relative inline-flex items-center justify-center px-12 py-5 overflow-hidden font-bold rounded-full bg-[#070A12] border-2 border-[#00C2FF] shadow-2xl shadow-[#00C2FF]/20 transition-all duration-300 ease-out hover:scale-105"
-                    >
-                        {/* Hover Background Effect */}
-                        <span className="absolute inset-0 w-full h-full bg-[#00C2FF] opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-out"></span>
-                        
-                        {/* Button Text */}
-                        <span className="relative text-sm uppercase tracking-widest text-[#00C2FF] group-hover:text-[#070A12] transition-colors duration-300 ease-out">
-                            [ BECOME AN OPERATOR ]
-                        </span>
-                    </Link>
-
+            <main className="flex-grow max-w-4xl mx-auto px-6 py-20 w-full flex items-center justify-center">
+                <div className="p-10 bg-[#0E1322] border border-slate-800 rounded-sm flex flex-col md:flex-row items-center gap-10 w-full shadow-2xl">
+                    <div className="relative w-48 h-48 rounded-full overflow-hidden border-2 border-[#00C2FF]/40 shadow-xl flex-shrink-0 bg-slate-900">
+                        <Image 
+                            src="/dharmendra-1a.jpg" 
+                            alt="Dharmendra Aseervetha Muthu" 
+                            fill 
+                            className="object-cover"
+                            priority
+                        />
+                    </div>
+                    <div>
+                        <span className="text-xs font-mono uppercase tracking-widest text-[#00C2FF] mb-2 block">Financial & Insurance Infrastructure</span>
+                        <h1 className="text-3xl font-extrabold text-white mb-3">Dharmendra Aseervetha Muthu</h1>
+                        <p className="text-slate-300 text-sm font-light leading-relaxed mb-6">
+                            Dedicated to providing rigorous financial education, risk-adjusted {currency} strategies, and structural independence for families and operators.
+                        </p>
+                        <div className="space-y-2 text-sm text-slate-300 font-mono">
+                            <p>📞 Office / Direct: <a href="tel:9056666696" className="text-[#00C2FF] hover:underline">(905) 666-6696</a></p>
+                            <p>📱 Mobile: <a href="tel:16477190382" className="text-[#00C2FF] hover:underline">+1 (647) 719-0382</a></p>
+                            <p>📍 Address: 203-1450 Hopkins St. Whitby, ON L1N 2C3</p>
+                        </div>
+                    </div>
                 </div>
             </main>
-
-            {/* Minimal Footer */}
-            <footer className="py-10 bg-[#070A12] border-t border-slate-800/60 text-center text-xs text-slate-600 uppercase tracking-widest">
-                <p>&copy; 2026 Dharmendra Aseervetha Muthu. All rights reserved.</p>
-            </footer>
-
         </div>
     );
 }
